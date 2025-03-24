@@ -1,0 +1,3 @@
+meshConfig:
+  enablePrometheusMerge: true
+  accessLogFile: /dev/stdout
