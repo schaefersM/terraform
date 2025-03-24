@@ -1,0 +1,11 @@
+sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80
+kind create cluster --config config --image "kindest/node:v1.29.8"
+kind get kubeconfig > ~/.kube/config
+helm upgrade --install --set args={--kubelet-insecure-tls} metrics-server metrics-server/metrics-server --namespace kube-system
+
+
+cd prometheuser
+make manifests
+make install
+kubectl get crd
+make run
