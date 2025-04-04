@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: grafana-gateway
+  namespace: grafana
+spec:
+  selector:
+    istio: ingressgateway # Standardmäßig verwendetes Gateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "grafana.example.com" # Ersetzen Sie dies durch Ihre tatsächliche Domain
+
