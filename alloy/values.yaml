@@ -1,0 +1,52 @@
+alloy:
+  configMap:
+    create: true
+    content: |-
+        discovery.kubernetes "pods" {
+          role = "pod"
+        }
+
+        loki.source.kubernetes "pods" {
+          targets    = discovery.kubernetes.pods.targets
+          forward_to = [loki.process.istio_logs.receiver]
+        }
+
+        loki.process "istio_logs" {
+          forward_to = [loki.write.default.receiver]
+
+          stage.json {
+            expressions = {
+              authority       = "authority",
+              method          = "method",
+              protocol        = "protocol",
+              response_code   = "response_code",
+              response_flags  = "response_flags",
+              path            = "path",
+              upstream_service = "upstream_cluster",
+
+            }
+          }
+
+          stage.labels {
+            values = {
+              authority       = "",
+              method          = "",
+              protocol        = "",
+              response_code   = "",
+              response_flags  = "",
+              path            = "",
+              upstream_service = "",
+              cluster_name    = "powerhouse",
+            }
+          }
+        }
+
+        loki.write "default" {
+          endpoint {
+            url = "http://loki-write.loki.svc.cluster.local:3100/loki/api/v1/push"
+            headers = {
+              "X-Scope-OrgID" = "max-istio",
+            }
+          }
+        }
+
