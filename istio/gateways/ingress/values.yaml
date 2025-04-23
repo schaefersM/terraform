@@ -39,7 +39,7 @@ _internal_defaults_do_not_set:
   securityContext: {}
   containerSecurityContext: {}
   service:
-          type: NodePort
+          type: LoadBalancer
           ports:
             - name: status-port
               protocol: TCP
@@ -49,12 +49,10 @@ _internal_defaults_do_not_set:
               protocol: TCP
               port: 80
               targetPort: 8080
-              nodePort: 80
             - name: https
               protocol: TCP
               port: 443
               targetPort: 8443
-              nodePort: 443
   resources:
     requests:
       cpu: 100m
