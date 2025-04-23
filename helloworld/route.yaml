@@ -12,6 +12,15 @@ spec:
       protocol: HTTP
     hosts:
     - "*"
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls: 
+      mode: SIMPLE
+      credentialName: helloworld-tls
+    hosts:
+      - "*"
 ---
 apiVersion: networking.istio.io/v1
 kind: VirtualService
@@ -19,7 +28,7 @@ metadata:
   name: helloworld
 spec:
   hosts:
-    - "hello.com"
+    - "schaefersm.com"
   gateways:
   - helloworld-gateway
   http:
