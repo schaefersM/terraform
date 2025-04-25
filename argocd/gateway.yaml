@@ -21,6 +21,6 @@ spec:
         protocol: HTTPS
       tls: 
         mode: SIMPLE
-        credentialName: argocd-tls
+        credentialName: schaefersm-wildcard-tls
       hosts:
         - "argocd.schaefersm.com"
