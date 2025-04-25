@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: schaefersm-com-wildcard
+  namespace: istio-system
+spec:
+  secretName: schaefersm-wildcard-tls
+  dnsNames:
+    - "*.schaefersm.com"
+    - "schaefersm.com"
+  issuerRef:
+    name: my-ca-issuer
+    kind: ClusterIssuer
+  duration: 720h
+  renewBefore: 360h
+
