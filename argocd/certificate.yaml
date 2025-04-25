@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd
+  namespace: istio-system
+spec:
+  secretName: argocd-tls
+  commonName: argocd.schaefersm.com
+  dnsNames:
+    - argocd.schaefersm.com
+  issuerRef:
+    name: my-ca-issuer
+    kind: ClusterIssuer
+
