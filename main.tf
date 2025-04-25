@@ -55,6 +55,9 @@ resource "helm_release" "istiod" {
   chart      = "istiod"
   create_namespace = "true"
   namespace  = "istio-system"
+  values = [
+    "${file("istio/istiod/values.yaml")}"
+  ]
 }
 resource "helm_release" "istio-base" {
   name       = "istio-base"
