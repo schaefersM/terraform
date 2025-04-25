@@ -12,7 +12,7 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: httpbin.schaefersm.com-credential 
+      credentialName: schaefersm-wildcard-tls 
     hosts:
     - "httpbin.schaefersm.com"
 
